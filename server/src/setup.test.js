@@ -1,0 +1,26 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import {randomBytes,randomUUID} from "node:crypto";
+const file=path.join(os.tmpdir(),`ingenacc-setup-${randomUUID()}.db`);
+const setupToken=randomBytes(24).toString("base64url"),adminPassword=`${randomBytes(18).toString("base64url")}Aa1!`;
+process.env.DATABASE_PATH=file;process.env.INGENACC_SEED_MODE="operational";process.env.SETUP_TOKEN=setupToken;process.env.JWT_SECRET=randomBytes(48).toString("base64url");
+const {app}=await import("./index.js");const {closeDatabase}=await import("./db/database.js");
+test("instalación operativa inicia vacía y crea únicamente al gerente autorizado",async t=>{
+ const server=app.listen(0,"127.0.0.1");await new Promise(r=>server.once("listening",r));
+ t.after(async()=>{await new Promise(r=>server.close(r));closeDatabase();for(const s of ["","-wal","-shm"])fs.rmSync(file+s,{force:true});});
+ const base=`http://127.0.0.1:${server.address().port}`;const status=await (await fetch(base+"/api/setup/status")).json();assert.equal(status.data.required,true);assert.equal(status.data.tokenRequired,true);
+ const body={legalName:"INGENACC Maquinarias y Equipos S.A.C.",tradeName:"INGENACC",ruc:"20607537764",address:"Trujillo, Perú",adminName:"Gerencia INGENACC",adminEmail:"gerencia@ingenacc.pe",password:adminPassword,locationId:"t1"};
+ assert.equal((await fetch(base+"/api/setup/initialize",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({...body,setupToken:randomBytes(24).toString("base64url")})})).status,403);
+ assert.equal((await fetch(base+"/api/setup/initialize",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({...body,setupToken})})).status,201);
+ assert.equal((await fetch(base+"/api/setup/initialize",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({...body,setupToken})})).status,409);
+ const login=await fetch(base+"/api/auth/login",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({email:body.adminEmail,password:body.password})});assert.equal(login.status,200);const token=(await login.json()).data.token;const headers={authorization:`Bearer ${token}`,"content-type":"application/json"};
+ const snapshot=(await (await fetch(base+"/api/bootstrap",{headers})).json()).data;
+ assert.equal(snapshot.demoMode,false);assert.equal(snapshot.products.length,0);assert.equal(snapshot.clients.length,0);assert.equal(snapshot.users.length,1);
+ const row={code:"",barcode:"",manufacturerCode:"GX200",name:"Motor Honda GX200",description:"",brand:"Honda",model:"GX200",sector:"Multipropósito",category:"Motores",subcategory:"Por validar",unit:"UND",costPrice:900,price:1200,minStock:2,initialStock:5,locationId:"t1",power:"Por validar",fuel:"Gasolina",origin:"Por validar",warranty:"Por validar"};
+ const preview=await fetch(base+"/api/products/import",{method:"POST",headers,body:JSON.stringify({rows:[row],commit:false})});assert.equal(preview.status,200);assert.equal((await preview.json()).data.valid,1);
+ const imported=await fetch(base+"/api/products/import",{method:"POST",headers,body:JSON.stringify({rows:[row],commit:true})});assert.equal(imported.status,201);assert.equal((await imported.json()).data.imported,1);
+ const updated=(await (await fetch(base+"/api/bootstrap",{headers})).json()).data;assert.equal(updated.products.length,1);assert.equal(updated.products[0].stock.t1,5);assert.match(updated.products[0].code,/^SKU-/);assert.equal(updated.movements.length,1);
+});

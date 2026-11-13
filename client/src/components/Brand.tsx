@@ -1,0 +1,1 @@
+export function Brand({dark=false,compact=false}:{dark?:boolean;compact?:boolean}){return <div className={`brand official-brand ${dark?"brand-dark":""} ${compact?"brand-compact":""}`}><img src="/ingenacc-logo-cropped.png" alt="INGENACC Maquinaria y Equipos S.A.C."/></div>}

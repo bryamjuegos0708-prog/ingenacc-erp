@@ -1,0 +1,123 @@
+[
+  {
+    "id": "productos",
+    "title": "¿Qué marcas y productos tienen?",
+    "keywords": "marcas productos catalogo honda makita italika bonhoeffer bonhofer",
+    "answer": "Trabajamos con Honda, Bonhoeffer, Italika, Makita y otras marcas del catálogo. Indícame el modelo o el uso que necesitas y puedo consultar los productos publicados. Confirma disponibilidad y especificaciones con ventas antes de comprar."
+  },
+  {
+    "id": "elegir",
+    "title": "Ayúdame a elegir un equipo",
+    "keywords": "elegir equipo motobomba generador potencia recomendar jardin",
+    "answer": "Cuéntame para qué usarás el equipo, cuántas horas al día y tu presupuesto. Para una motobomba necesitamos caudal, altura y distancia; para un generador, la potencia nominal y de arranque de las cargas. No conviene elegir únicamente por precio ni asumir compatibilidad. Verifica la ficha del modelo con ventas."
+  },
+  {
+    "id": "proforma",
+    "title": "¿Puedo cotizar varios productos?",
+    "keywords": "proforma cotizar cotizacion simular presupuesto varios productos pedido",
+    "answer": "Sí, puedes incluir varios productos y cantidades en una proforma. Una cotización no confirma una venta ni garantiza existencias. Solicita que ventas revise los precios vigentes, descuentos autorizados y vigencia antes de confirmar tu pedido."
+  },
+  {
+    "id": "pagos",
+    "title": "¿Aceptan adelantos o crédito?",
+    "keywords": "pago pagos adelanto credito entrega descuento",
+    "answer": "INGENACC admite adelantos y descuentos autorizados; no vende a crédito. Las entregas son completas y requieren verificar el pago total y la disponibilidad. Los descuentos deben ser aprobados por el jefe o gerente. Confirma los medios de pago y condiciones de tu pedido con ventas."
+  },
+  {
+    "id": "garantia",
+    "title": "¿Cómo solicito una garantía?",
+    "keywords": "garantia reparar reparacion serie servicio falla devolucion",
+    "answer": "Ten a mano el comprobante, modelo, número de serie o código del producto y una descripción de la falla. El personal debe registrar y evaluar el caso según las condiciones del equipo. No puedo prometer cobertura ni plazos sin revisar esa documentación. El sistema gestiona garantías y servicio técnico; las devoluciones comerciales están deshabilitadas."
+  },
+  {
+    "id": "seguridad",
+    "title": "Uso y mantenimiento seguro",
+    "keywords": "mantenimiento aceite combustible seguridad peligro instalar",
+    "answer": "Consulta el manual exacto de tu modelo antes de elegir aceite, combustible o repuestos. Apaga y deja enfriar el equipo antes de intervenirlo. No uses motores de combustión en espacios cerrados. Para instalaciones eléctricas o fallas peligrosas, solicita un técnico calificado; no improvises conexiones."
+  },
+  {
+    "id": "clientes",
+    "title": "Consultar el historial de un cliente",
+    "keywords": "cliente clientes historial recompra dni ruc",
+    "staff": true,
+    "roles": [
+      "JEFE",
+      "GERENTE",
+      "ADMINISTRACION",
+      "VENTAS"
+    ],
+    "answer": "En Clientes busca al comprador por nombre o documento y abre su historial. Evita crear registros duplicados. Para una nueva compra, reutiliza el cliente y verifica sus datos, los precios actuales y las existencias. Inacc no lee ni comparte los datos personales del historial."
+  },
+  {
+    "id": "inventario",
+    "title": "¿Cómo consulto el inventario?",
+    "keywords": "inventario stock kardex movimiento traslado almacen ubicacion",
+    "staff": true,
+    "answer": "En Inventario revisa el producto y la ubicación. Distingue existencias físicas de unidades reservadas por ventas con adelanto. Los traslados deben registrar origen y destino; utiliza Kardex o Movimientos para revisar la trazabilidad. Los ajustes requieren la autorización correspondiente."
+  },
+  {
+    "id": "compras",
+    "title": "Registrar una compra o adquisición",
+    "keywords": "compra compras adquisicion proveedor recepcion",
+    "staff": true,
+    "roles": [
+      "JEFE",
+      "GERENTE",
+      "ADMINISTRACION",
+      "ALMACEN"
+    ],
+    "answer": "En Compras selecciona un proveedor, productos, cantidades y ubicación de recepción. Verifica lo efectivamente recibido y registra las series cuando corresponda. No dupliques el ingreso mediante un ajuste manual. Confirma el documento antes de guardarlo; Inacc no registra operaciones por ti."
+  },
+  {
+    "id": "acceso",
+    "title": "¿Quién autoriza cambios y cierre de caja?",
+    "keywords": "roles permiso permisos costo costos precio precios caja cierre acceso login",
+    "staff": true,
+    "answer": "El jefe y el gerente son quienes pueden consultar costos, cambiar precios, aprobar ajustes y cerrar caja. Inicia sesión con tu cuenta asignada. Si no puedes ingresar, solicita al administrador que revise tu usuario; no compartas contraseñas con el asistente."
+  },
+  {
+    "id": "sunat",
+    "title": "¿El comprobante ya es válido para SUNAT?",
+    "keywords": "sunat factura facturacion comprobante boleta",
+    "answer": "La integración electrónica con SUNAT requiere configurar y validar el proveedor de emisión de la empresa. Un comprobante interno no es tributario hasta recibir la constancia de aceptación del proveedor autorizado. Confirma su estado con administración antes de entregarlo como comprobante electrónico."
+  },
+  {
+    "id": "backup",
+    "title": "¿Cómo hago un respaldo?",
+    "keywords": "respaldo backup copia base datos",
+    "staff": true,
+    "roles": [
+      "JEFE",
+      "GERENTE"
+    ],
+    "answer": "Con una cuenta autorizada utiliza la opción de respaldo de base de datos del sistema. Guarda la copia con fecha en un medio distinto del servidor, verifica que no esté vacía y realiza una restauración de prueba en un entorno separado. Una copia del código no sustituye el respaldo de la base SQLite."
+  },
+  {
+    "id": "excel",
+    "title": "¿Cómo importo productos desde Excel?",
+    "keywords": "excel importar plantilla catalogo",
+    "staff": true,
+    "answer": "En Productos selecciona Importar Excel y descarga la plantilla. Completa los campos, carga el archivo y revisa la vista previa. Corrige los errores antes de confirmar. El límite es de 2 000 filas y una fila inválida impide importar el lote completo. Esta acción requiere permisos de gerencia o jefatura."
+  },
+  {
+    "id": "inicio",
+    "title": "¿Cómo inicio INGENACC en otra PC?",
+    "keywords": "iniciar servidor red pc conexion",
+    "staff": true,
+    "answer": "Ejecuta INICIAR-SISTEMA-WINDOWS.bat en la PC principal y mantenla encendida. Las otras PC de la misma red acceden a http://IP-DE-LA-PC-PRINCIPAL:4000. Si no conecta, revisa la IP, la ventana del servidor y el firewall de red privada. No abras el puerto del router a Internet."
+  },
+  {
+    "id": "etiquetas",
+    "title": "¿Qué etiquetas utiliza la empresa?",
+    "keywords": "etiqueta etiquetas impresora codigo barras repuestos motores",
+    "staff": true,
+    "answer": "La empresa confirmó la RP POS RP365B USB de 203 DPI. Motores: etiquetas de 30 × 20 mm con serie individual. Repuestos: 50 × 25 mm con código compartido por unidades del mismo tipo. La referencia superior es la factura; abajo aparecen precio mínimo a la izquierda y máximo a la derecha. Es una especificación confirmada, no una afirmación de que la impresión ya esté integrada o probada."
+  },
+  {
+    "id": "conexionia",
+    "title": "¿Cómo activo la IA general?",
+    "keywords": "ia general externa activar configurar",
+    "staff": true,
+    "answer": "El administrador configura OPENAI_API_KEY y OPENAI_MODEL en el archivo .env del servidor y reinicia INGENACC. Nunca escribas la clave en el chat ni en el código del cliente. Selecciona IA general y autoriza el envío de tus mensajes. Sin configuración puedes seguir usando Ayuda INGENACC. La conexión externa requiere Internet y disponibilidad de la cuenta API."
+  }
+]

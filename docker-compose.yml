@@ -1,0 +1,22 @@
+services:
+  ingenacc:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    environment:
+      JWT_SECRET: ${JWT_SECRET}
+      SETUP_TOKEN: ${SETUP_TOKEN}
+      CLIENT_ORIGIN: ${CLIENT_ORIGIN:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-5.4-mini}
+      INACC_WEB_SEARCH: ${INACC_WEB_SEARCH:-true}
+      AUTOMATIC_BACKUPS_ENABLED: ${AUTOMATIC_BACKUPS_ENABLED:-true}
+      BACKUP_DIR: /app/server/backups
+      BACKUP_RETENTION: ${BACKUP_RETENTION:-30}
+    volumes:
+      - ingenacc_data:/app/server/data
+      - ingenacc_backups:/app/server/backups
+volumes:
+  ingenacc_data:
+  ingenacc_backups:
